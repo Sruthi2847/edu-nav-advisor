@@ -121,7 +121,11 @@ const Scholarships = () => {
                           <span>Deadline: {scholarship.deadline}</span>
                         </div>
                         <div className="pt-4">
-                          <Button className="w-full" variant="hero">
+                          <Button 
+                            className="w-full" 
+                            variant="hero"
+                            onClick={() => window.open("https://scholarships.gov.in/", "_blank")}
+                          >
                             Apply Now
                           </Button>
                         </div>

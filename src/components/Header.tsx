@@ -1,11 +1,33 @@
-import { Book, User, Menu } from "lucide-react";
+import { Book, User, Menu, Bell } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { Badge } from "@/components/ui/badge";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
+import NotificationSystem from "./NotificationSystem";
+import { mockNotifications } from "@/data/mockData";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isNotificationOpen, setIsNotificationOpen] = useState(false);
+  const [user, setUser] = useState(null);
   const location = useLocation();
+
+  useEffect(() => {
+    // Get current user
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      setUser(user);
+    });
+
+    // Listen for auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      setUser(session?.user ?? null);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const unreadNotifications = mockNotifications.filter(n => !n.isRead).length;
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -37,16 +59,55 @@ const Header = () => {
           >
             Scholarships
           </Link>
+          <Link 
+            to="/courses" 
+            className={`text-sm font-medium transition-colors ${location.pathname === '/courses' ? 'text-primary' : 'hover:text-primary'}`}
+          >
+            Courses
+          </Link>
         </nav>
 
         <div className="flex items-center gap-3">
-          <Button variant="outline-primary" size="sm" className="hidden sm:flex">
-            <User className="h-4 w-4" />
-            Login
-          </Button>
-          <Button variant="hero" size="sm">
-            Get Started
-          </Button>
+          {user && (
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setIsNotificationOpen(true)}
+              className="relative"
+            >
+              <Bell className="h-4 w-4" />
+              {unreadNotifications > 0 && (
+                <Badge 
+                  variant="destructive" 
+                  className="absolute -top-1 -right-1 h-5 w-5 rounded-full p-0 flex items-center justify-center text-xs"
+                >
+                  {unreadNotifications}
+                </Badge>
+              )}
+            </Button>
+          )}
+          
+          {user ? (
+            <Link to="/profile">
+              <Button variant="outline-primary" size="sm" className="hidden sm:flex">
+                <User className="h-4 w-4" />
+                Profile
+              </Button>
+            </Link>
+          ) : (
+            <Link to="/auth">
+              <Button variant="outline-primary" size="sm" className="hidden sm:flex">
+                <User className="h-4 w-4" />
+                Login
+              </Button>
+            </Link>
+          )}
+          
+          <Link to={user ? "/courses" : "/auth"}>
+            <Button variant="hero" size="sm">
+              {user ? "Explore Courses" : "Get Started"}
+            </Button>
+          </Link>
           
           {/* Mobile Menu Button */}
           <Button
@@ -73,13 +134,29 @@ const Header = () => {
             <Link to="/scholarships" className="text-sm font-medium hover:text-primary transition-colors">
               Scholarships
             </Link>
-            <Button variant="outline-primary" size="sm" className="sm:hidden mt-2">
-              <User className="h-4 w-4" />
-              Login
-            </Button>
+            <Link to="/courses" className="text-sm font-medium hover:text-primary transition-colors">
+              Courses
+            </Link>
+            {user ? (
+              <Link to="/profile" className="text-sm font-medium hover:text-primary transition-colors">
+                Profile
+              </Link>
+            ) : (
+              <Link to="/auth">
+                <Button variant="outline-primary" size="sm" className="sm:hidden mt-2">
+                  <User className="h-4 w-4" />
+                  Login
+                </Button>
+              </Link>
+            )}
           </nav>
         </div>
       )}
+      
+      <NotificationSystem 
+        isOpen={isNotificationOpen} 
+        onClose={() => setIsNotificationOpen(false)} 
+      />
     </header>
   );
 };

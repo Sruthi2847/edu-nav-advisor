@@ -1,7 +1,7 @@
 import { ArrowRight, Play, BookOpen, Users, Target } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import heroImage from "@/assets/hero-education.jpg";
+import heroImage from "@/assets/education-background.jpg";
 const HeroSection = () => {
   return <section className="relative py-20 overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-background via-accent/30 to-background" />

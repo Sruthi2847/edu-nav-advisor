@@ -80,7 +80,11 @@ const Colleges = () => {
                       </div>
 
                       <div className="pt-4 space-y-2">
-                        <Button className="w-full" variant="hero">
+                        <Button 
+                          className="w-full" 
+                          variant="hero"
+                          onClick={() => window.open("https://www.ugc.ac.in/", "_blank")}
+                        >
                           View Details
                         </Button>
                         

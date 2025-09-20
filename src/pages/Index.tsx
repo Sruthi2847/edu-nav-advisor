@@ -3,6 +3,8 @@ import HeroSection from "@/components/HeroSection";
 import FeaturesSection from "@/components/FeaturesSection";
 import QuickAssessment from "@/components/QuickAssessment";
 import Footer from "@/components/Footer";
+import ChatBot from "@/components/ChatBot";
+import EducationalPopup from "@/components/EducationalPopup";
 
 const Index = () => {
   return (
@@ -14,6 +16,8 @@ const Index = () => {
         <QuickAssessment />
       </main>
       <Footer />
+      <ChatBot />
+      <EducationalPopup />
     </div>
   );
 };
