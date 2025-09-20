@@ -7,18 +7,10 @@ import { Badge } from "@/components/ui/badge";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { mockColleges } from "@/data/mockData";
-
 const Colleges = () => {
   const [searchTerm, setSearchTerm] = useState("");
-
-  const filteredColleges = mockColleges.filter(college =>
-    college.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    college.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    college.courses.some(course => course.toLowerCase().includes(searchTerm.toLowerCase()))
-  );
-
-  return (
-    <div className="min-h-screen bg-background">
+  const filteredColleges = mockColleges.filter(college => college.name.toLowerCase().includes(searchTerm.toLowerCase()) || college.location.toLowerCase().includes(searchTerm.toLowerCase()) || college.courses.some(course => course.toLowerCase().includes(searchTerm.toLowerCase())));
+  return <div className="min-h-screen bg-background">
       <Header />
       <main className="pt-20">
         {/* Hero Section */}
@@ -40,18 +32,12 @@ const Colleges = () => {
           <div className="container">
             <div className="relative max-w-md mx-auto mb-8">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
-              <Input
-                placeholder="Search colleges, courses, or locations..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10"
-              />
+              <Input placeholder="Search colleges, courses, or locations..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="pl-10" />
             </div>
 
             {/* Colleges Grid */}
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredColleges.map((college) => (
-                <Card key={college.id} className="hover:shadow-lg transition-shadow">
+              {filteredColleges.map(college => <Card key={college.id} className="hover:shadow-lg transition-shadow">
                   <CardHeader>
                     <CardTitle className="text-lg">{college.name}</CardTitle>
                     <CardDescription className="flex items-center gap-2">
@@ -67,11 +53,9 @@ const Colleges = () => {
                           Available Courses:
                         </h4>
                         <div className="flex flex-wrap gap-1">
-                          {college.courses.map((course, index) => (
-                            <Badge key={index} variant="secondary" className="text-xs">
+                          {college.courses.map((course, index) => <Badge key={index} variant="secondary" className="text-xs">
                               {course}
-                            </Badge>
-                          ))}
+                            </Badge>)}
                         </div>
                       </div>
 
@@ -89,11 +73,9 @@ const Colleges = () => {
                       <div>
                         <h4 className="font-medium mb-2">Facilities:</h4>
                         <div className="flex flex-wrap gap-1">
-                          {college.facilities.map((facility, index) => (
-                            <Badge key={index} variant="outline" className="text-xs">
+                          {college.facilities.map((facility, index) => <Badge key={index} variant="outline" className="text-xs">
                               {facility}
-                            </Badge>
-                          ))}
+                            </Badge>)}
                         </div>
                       </div>
 
@@ -101,27 +83,20 @@ const Colleges = () => {
                         <Button className="w-full" variant="hero">
                           View Details
                         </Button>
-                        <Button className="w-full" variant="outline-primary">
-                          Apply Now
-                        </Button>
+                        
                       </div>
                     </div>
                   </CardContent>
-                </Card>
-              ))}
+                </Card>)}
             </div>
 
-            {filteredColleges.length === 0 && (
-              <div className="text-center py-12">
+            {filteredColleges.length === 0 && <div className="text-center py-12">
                 <p className="text-muted-foreground">No colleges found matching your search criteria.</p>
-              </div>
-            )}
+              </div>}
           </div>
         </section>
       </main>
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Colleges;
