@@ -1,9 +1,7 @@
 import { Book, MapPin, Phone, Mail, Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
-
 const Footer = () => {
-  return (
-    <footer className="bg-foreground text-background py-16">
+  return <footer className="bg-foreground text-background py-16">
       <div className="container">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {/* Brand */}
@@ -59,7 +57,7 @@ const Footer = () => {
             <div className="space-y-3">
               <div className="flex items-center gap-2 text-background/70">
                 <MapPin className="h-4 w-4" />
-                <span className="text-sm">New Delhi, India</span>
+                <span className="text-sm">Hyderabad, India</span>
               </div>
               <div className="flex items-center gap-2 text-background/70">
                 <Phone className="h-4 w-4" />
@@ -74,9 +72,7 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-background/20 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-background/70 text-sm">
-            © 2024 EduGuide Pro. All rights reserved.
-          </p>
+          <p className="text-background/70 text-sm">© 2025 EduGuide Pro. All rights reserved.</p>
           <div className="flex gap-6 text-sm">
             <a href="#" className="text-background/70 hover:text-secondary transition-colors">Privacy Policy</a>
             <a href="#" className="text-background/70 hover:text-secondary transition-colors">Terms of Service</a>
@@ -84,8 +80,6 @@ const Footer = () => {
           </div>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
-
 export default Footer;
