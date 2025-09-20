@@ -187,7 +187,7 @@ const QuickAssessment = () => {
   const progress = ((currentQuestion + 1) / questions.length) * 100;
 
   return (
-    <section className="py-20 bg-muted/30">
+    <section id="assessment" className="py-20 bg-muted/30">
       <div className="container max-w-2xl">
         <div className="mb-8">
           <div className="flex items-center justify-between mb-4">

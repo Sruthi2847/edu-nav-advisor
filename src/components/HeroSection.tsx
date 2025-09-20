@@ -27,14 +27,24 @@ const HeroSection = () => {
             </div>
 
             <div className="flex flex-wrap gap-4">
-              <Button variant="hero" size="lg" className="group">
-                Start Your Journey
+              <Button 
+                variant="hero" 
+                size="lg" 
+                className="group"
+                onClick={() => document.getElementById('assessment')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                Start Assessment
                 <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Button>
               
-              <Button variant="outline-primary" size="lg" className="group">
-                <Play className="h-5 w-5 group-hover:scale-110 transition-transform" />
-                Watch Demo
+              <Button 
+                variant="outline-primary" 
+                size="lg" 
+                className="group"
+                onClick={() => window.location.href = '/colleges'}
+              >
+                <BookOpen className="h-5 w-5 group-hover:scale-110 transition-transform" />
+                Explore Colleges
               </Button>
             </div>
 
