@@ -6,7 +6,7 @@ import { Progress } from "@/components/ui/progress";
 
 const EducationalPopup = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(45);
+  const [timeLeft, setTimeLeft] = useState(4);
 
   useEffect(() => {
     // Check if popup was shown in the last 24 hours
@@ -45,7 +45,7 @@ const EducationalPopup = () => {
     setIsVisible(false);
   };
 
-  const progressPercentage = ((45 - timeLeft) / 45) * 100;
+  const progressPercentage = ((4 - timeLeft) / 4) * 100;
 
   if (!isVisible) return null;
 

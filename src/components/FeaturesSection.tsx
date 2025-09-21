@@ -40,8 +40,8 @@ const features = [
   },
   {
     icon: TrendingUp,
-    title: "Career Analytics",
-    description: "Data-driven insights on job market trends, salary expectations, and growth opportunities in different fields.",
+    title: "ROI Calculator",
+    description: "Compare total fees vs average placements (Govt. vs Private)",
     color: "text-secondary",
     bgColor: "bg-secondary/10",
   },
