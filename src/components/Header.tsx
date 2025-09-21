@@ -40,7 +40,7 @@ const Header = () => {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-6">
+        <nav className="hidden lg:flex items-center gap-4">
           <Link 
             to="/" 
             className={`text-sm font-medium transition-colors ${location.pathname === '/' ? 'text-primary' : 'hover:text-primary'}`}
@@ -52,6 +52,12 @@ const Header = () => {
             className={`text-sm font-medium transition-colors ${location.pathname === '/colleges' ? 'text-primary' : 'hover:text-primary'}`}
           >
             Colleges
+          </Link>
+          <Link 
+            to="/college-comparison" 
+            className={`text-sm font-medium transition-colors ${location.pathname === '/college-comparison' ? 'text-primary' : 'hover:text-primary'}`}
+          >
+            Compare
           </Link>
           <Link 
             to="/scholarships" 
@@ -123,13 +129,25 @@ const Header = () => {
 
       {/* Mobile Navigation */}
       {isMenuOpen && (
-        <div className="md:hidden border-t bg-background/95 backdrop-blur">
+        <div className="lg:hidden border-t bg-background/95 backdrop-blur">
           <nav className="container py-4 flex flex-col gap-3">
             <Link to="/" className="text-sm font-medium hover:text-primary transition-colors">
               Home
             </Link>
             <Link to="/colleges" className="text-sm font-medium hover:text-primary transition-colors">
               Colleges
+            </Link>
+            <Link to="/college-comparison" className="text-sm font-medium hover:text-primary transition-colors">
+              Compare Colleges
+            </Link>
+            <Link to="/alumni-stories" className="text-sm font-medium hover:text-primary transition-colors">
+              Alumni Stories
+            </Link>
+            <Link to="/roi-calculator" className="text-sm font-medium hover:text-primary transition-colors">
+              ROI Calculator
+            </Link>
+            <Link to="/budget-finder" className="text-sm font-medium hover:text-primary transition-colors">
+              Budget Finder
             </Link>
             <Link to="/scholarships" className="text-sm font-medium hover:text-primary transition-colors">
               Scholarships
@@ -143,7 +161,7 @@ const Header = () => {
               </Link>
             ) : (
               <Link to="/auth">
-                <Button variant="outline-primary" size="sm" className="sm:hidden mt-2">
+                <Button variant="outline-primary" size="sm" className="lg:hidden mt-2">
                   <User className="h-4 w-4" />
                   Login
                 </Button>

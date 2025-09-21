@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
+import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { mockColleges } from "@/data/mockData";
@@ -80,13 +81,22 @@ const Colleges = () => {
                       </div>
 
                       <div className="pt-4 space-y-2">
-                        <Button 
-                          className="w-full" 
-                          variant="hero"
-                          onClick={() => window.open("https://www.ugc.ac.in/", "_blank")}
-                        >
-                          View Details
-                        </Button>
+                        <div className="grid grid-cols-2 gap-2">
+                          <Button 
+                            className="w-full" 
+                            variant="hero"
+                            onClick={() => window.open("https://www.ugc.ac.in/", "_blank")}
+                          >
+                            View Details
+                          </Button>
+                          <Button 
+                            variant="outline" 
+                            className="w-full"
+                            onClick={() => window.location.href = "/college-comparison"}
+                          >
+                            Compare
+                          </Button>
+                        </div>
                         
                       </div>
                     </div>
@@ -97,6 +107,34 @@ const Colleges = () => {
             {filteredColleges.length === 0 && <div className="text-center py-12">
                 <p className="text-muted-foreground">No colleges found matching your search criteria.</p>
               </div>}
+
+            {/* Quick Access Tools */}
+            <div className="mt-12 grid md:grid-cols-4 gap-4">
+              <Link to="/college-comparison">
+                <Button variant="outline" className="w-full h-20 flex flex-col gap-2">
+                  <span className="text-lg">⚖️</span>
+                  <span className="text-sm">Compare Colleges</span>
+                </Button>
+              </Link>
+              <Link to="/alumni-stories">
+                <Button variant="outline" className="w-full h-20 flex flex-col gap-2">
+                  <span className="text-lg">🎓</span>
+                  <span className="text-sm">Alumni Stories</span>
+                </Button>
+              </Link>
+              <Link to="/roi-calculator">
+                <Button variant="outline" className="w-full h-20 flex flex-col gap-2">
+                  <span className="text-lg">📊</span>
+                  <span className="text-sm">ROI Calculator</span>
+                </Button>
+              </Link>
+              <Link to="/budget-finder">
+                <Button variant="outline" className="w-full h-20 flex flex-col gap-2">
+                  <span className="text-lg">💰</span>
+                  <span className="text-sm">Budget Finder</span>
+                </Button>
+              </Link>
+            </div>
           </div>
         </section>
       </main>
