@@ -1,4 +1,4 @@
-import { useState } from "react";
+ import { useState } from "react";
 import { ArrowLeft, DollarSign, Search, MapPin, GraduationCap, TrendingUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -18,12 +18,12 @@ const BudgetFinder = () => {
   const [showResults, setShowResults] = useState(false);
 
   const handleSearch = () => {
-    if (budget) {
+    if (budget && !isNaN(Number(budget)) && Number(budget) > 0) {
       setShowResults(true);
     }
-  };
+  } 
 
-  const totalBudget = budget ? parseFloat(budget) * parseInt(courseDuration) : 0;
+  const totalBudget = budget && !isNaN(Number(budget)) ? parseFloat(budget) * parseInt(courseDuration) : 0;
   
   const affordableColleges = mockColleges
     .filter(college => college.type === "government") // Focus on government colleges
@@ -39,9 +39,13 @@ const BudgetFinder = () => {
     })
     .sort((a, b) => a.annualFees - b.annualFees);
 
-  const savedAmount = totalBudget > 0 ? mockColleges
-    .filter(c => c.type === "private")
-    .reduce((min, college) => Math.min(min, college.annualFees * parseInt(courseDuration)), Infinity) - totalBudget : 0;
+  let savedAmount = 0;
+  if (totalBudget > 0) {
+    const minPrivate = mockColleges
+      .filter(c => c.type === "private")
+      .reduce((min, college) => Math.min(min, college.annualFees * parseInt(courseDuration)), Infinity);
+    savedAmount = minPrivate === Infinity ? 0 : Math.max(minPrivate - totalBudget, 0);
+  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -180,7 +184,7 @@ const BudgetFinder = () => {
                   <>
                     <div className="mb-6">
                       <h2 className="text-2xl font-bold mb-2">
-                        With ₹{budget?.toLocaleString()} budget, you can study in these {affordableColleges.length} top Government Colleges:
+                        With ₹{Number(budget).toLocaleString()} budget, you can study in these {affordableColleges.length} top Government Colleges:
                       </h2>
                       <p className="text-muted-foreground">All colleges listed below fit within your budget and offer quality education</p>
                     </div>

@@ -14,6 +14,7 @@ import AlumniStories from "./pages/AlumniStories";
 import ROICalculator from "./pages/ROICalculator";
 import BudgetFinder from "./pages/BudgetFinder";
 import NotFound from "./pages/NotFound";
+import Notifications from "./pages/Notifications";
 
 const queryClient = new QueryClient();
 
@@ -34,6 +35,7 @@ const App = () => (
           <Route path="/courses" element={<Courses />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/notifications" element={<Notifications />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
