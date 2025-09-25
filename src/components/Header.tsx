@@ -49,6 +49,7 @@ const Header = () => {
           <Link to="/scholarships" className={`text-sm font-medium transition-colors ${location.pathname === '/scholarships' ? 'text-primary' : 'hover:text-primary'}`}>Scholarships</Link>
           <Link to="/notifications" className={`text-sm font-medium transition-colors ${location.pathname === '/notifications' ? 'text-primary' : 'hover:text-primary'}`}>Notifications</Link>
           <Link to="/alumni-stories" className={`text-sm font-medium transition-colors ${location.pathname === '/alumni-stories' ? 'text-primary' : 'hover:text-primary'}`}>Alumni Stories</Link>
+          <Link to="/profile" className={`text-sm font-medium transition-colors ${location.pathname === '/profile' ? 'text-primary' : 'hover:text-primary'}`}>Profile</Link>
         </nav>
 
         <div className="flex items-center gap-3">

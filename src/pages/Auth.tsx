@@ -115,8 +115,8 @@ const Auth = () => {
         });
       } else {
         const redirectUrl = `${window.location.origin}/`;
-        
-        const { error } = await supabase.auth.signUp({
+        // Register user with Supabase Auth
+        const { data, error } = await supabase.auth.signUp({
           email: formData.email,
           password: formData.password,
           options: {
@@ -146,6 +146,29 @@ const Auth = () => {
             });
           }
           return;
+        }
+
+        // Insert user details into profiles table
+        const user = data?.user;
+        if (user) {
+          const { error: profileError } = await supabase.from('profiles').insert([
+            {
+              user_id: user.id,
+              email: formData.email,
+              full_name: formData.fullName,
+              phone: formData.phone,
+              location: formData.location,
+              class_grade: formData.class,
+              stream: formData.stream
+            }
+          ]);
+          if (profileError) {
+            toast({
+              title: "Profile Save Failed",
+              description: profileError.message,
+              variant: "destructive",
+            });
+          }
         }
 
         toast({
